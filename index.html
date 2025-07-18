@@ -63,10 +63,10 @@
   <!-- Second screen -->
   <div id="movie-picker">
     <h1>Yayy!! Okayyy, So let’s pick a movie 🎬</h1>
-    <div class="option" onclick="pickMovie('A')">Superboys of Malegaon 🦸</div>
-    <div class="option" onclick="pickMovie('B')">Mission Impossible 3 🕵️ </div>
+    <div class="option" onclick="pickMovie('A')">Super Boys of Malegaon 🦸</div>
+    <div class="option" onclick="pickMovie('B')">Mission Impossible 3 🕵️</div>
     <div class="option" onclick="pickMovie('C')">Ford Vs Ferrari 🏎️</div>
-    <div class="option" onclick="pickMovie('D')">Black Panther Wakanda Forever 🦁</div>
+    <div class="option" onclick="pickMovie('D')">Black Panther 2: Wakanda Forever 🦁</div>
   </div>
 
   <!-- Final message -->
@@ -81,7 +81,6 @@
       const response = document.getElementById('response');
 
       if (answer === 'yes') {
-        // Reset everything and go to movie picker
         document.getElementById('main-question').style.display = 'none';
         document.getElementById('movie-picker').style.display = 'block';
         response.textContent = '';
@@ -96,19 +95,32 @@
     }
 
     function pickMovie(option) {
+      let movie = "";
       let time = "";
 
       switch(option) {
-        case 'A': time = "11:00 PM"; break;
-        case 'B': time = "11:30 PM"; break;
-        case 'C': time = "12:00 AM"; break;
-        case 'D': time = "12:30 AM"; break;
+        case 'A':
+          movie = "Super Boys of Malegaon 🦸";
+          time = "11:00 PM";
+          break;
+        case 'B':
+          movie = "Mission Impossible 3 🕵️";
+          time = "11:30 PM";
+          break;
+        case 'C':
+          movie = "Ford Vs Ferrari 🏎️";
+          time = "12:00 AM";
+          break;
+        case 'D':
+          movie = "Black Panther 2: Wakanda Forever 🦁";
+          time = "12:30 AM";
+          break;
       }
 
       document.getElementById('movie-picker').style.display = 'none';
       document.getElementById('final-message').style.display = 'block';
-      document.getElementById('finalText').textContent = 
-        `Yay! Let's meet online to watch Movie ${option} at ${time} 🍿`;
+      document.getElementById('finalText').textContent =
+        `Yay! Let's meet online to watch "${movie}" at ${time} 🍿`;
     }
   </script>
 
