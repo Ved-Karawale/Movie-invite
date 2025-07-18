@@ -3,23 +3,39 @@
 <head>
   <title>Movie Night?</title>
   <style>
-    body {
-      font-family: 'Arial';
-      text-align: center;
-      margin-top: 80px;
+    * {
+      box-sizing: border-box;
+    }
+
+    html, body {
+      height: 100%;
+      margin: 0;
+      padding: 0;
+      font-family: 'Arial', sans-serif;
       background-color: #fff0f5;
     }
 
+    .centered-container {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      text-align: center;
+      padding: 20px;
+    }
+
     h1 {
-      font-size: 28px;
+      font-size: 2.2rem;
+      margin-bottom: 30px;
     }
 
     button, .option {
-      padding: 12px 24px;
+      padding: 14px 28px;
       margin: 12px;
-      font-size: 18px;
+      font-size: 20px;
       border: none;
-      border-radius: 10px;
+      border-radius: 12px;
       cursor: pointer;
       transition: 0.3s;
     }
@@ -31,12 +47,14 @@
 
     #response {
       margin-top: 30px;
-      font-size: 22px;
+      font-size: 20px;
       font-weight: bold;
     }
 
     .option {
-      display: inline-block;
+      display: block;
+      width: 80%;
+      max-width: 400px;
       background-color: #4CAF50;
       color: white;
     }
@@ -45,23 +63,35 @@
       background-color: #388e3c;
     }
 
-    #movie-picker, #final-message {
+    #movie-picker, #final-message, #main-question {
       display: none;
+    }
+
+    #main-question.active,
+    #movie-picker.active,
+    #final-message.active {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    #finalText {
+      font-size: 2rem;
+      padding: 20px;
+      line-height: 1.6;
     }
   </style>
 </head>
 <body>
 
-  <!-- First screen -->
-  <div id="main-question">
+  <div id="main-question" class="centered-container active">
     <h1>Are you free to watch a movie tonight?</h1>
-    <button id="yesBtn" onclick="handleClick('yes')">Yes</button>
-    <button id="noBtn" onclick="handleClick('no')">No</button>
+    <button onclick="handleClick('yes')">Yes</button>
+    <button onclick="handleClick('no')">No</button>
     <div id="response"></div>
   </div>
 
-  <!-- Second screen -->
-  <div id="movie-picker">
+  <div id="movie-picker" class="centered-container">
     <h1>Yayy!! Okayyy, So let’s pick a movie 🎬</h1>
     <div class="option" onclick="pickMovie('A')">Super Boys of Malegaon 🦸</div>
     <div class="option" onclick="pickMovie('B')">Mission Impossible 3 🕵️</div>
@@ -69,8 +99,7 @@
     <div class="option" onclick="pickMovie('D')">Black Panther 2: Wakanda Forever 🦁</div>
   </div>
 
-  <!-- Final message -->
-  <div id="final-message">
+  <div id="final-message" class="centered-container">
     <h1 id="finalText"></h1>
   </div>
 
@@ -81,8 +110,8 @@
       const response = document.getElementById('response');
 
       if (answer === 'yes') {
-        document.getElementById('main-question').style.display = 'none';
-        document.getElementById('movie-picker').style.display = 'block';
+        document.getElementById('main-question').classList.remove('active');
+        document.getElementById('movie-picker').classList.add('active');
         response.textContent = '';
       } else {
         noClickCount++;
@@ -117,8 +146,8 @@
           break;
       }
 
-      document.getElementById('movie-picker').style.display = 'none';
-      document.getElementById('final-message').style.display = 'block';
+      document.getElementById('movie-picker').classList.remove('active');
+      document.getElementById('final-message').classList.add('active');
       document.getElementById('finalText').textContent =
         `Yay! Let's meet online to watch "${movie}" at ${time} 🍿`;
     }
