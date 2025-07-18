@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Movie Night?</title>
+  <style>
+    body {
+      font-family: 'Arial';
+      text-align: center;
+      margin-top: 80px;
+      background-color: #fff0f5;
+    }
+
+    h1 {
+      font-size: 28px;
+    }
+
+    button, .option {
+      padding: 12px 24px;
+      margin: 12px;
+      font-size: 18px;
+      border: none;
+      border-radius: 10px;
+      cursor: pointer;
+      transition: 0.3s;
+    }
+
+    button {
+      background-color: #ff4081;
+      color: white;
+    }
+
+    #response {
+      margin-top: 30px;
+      font-size: 22px;
+      font-weight: bold;
+    }
+
+    .option {
+      display: inline-block;
+      background-color: #4CAF50;
+      color: white;
+    }
+
+    .option:hover {
+      background-color: #388e3c;
+    }
+
+    #movie-picker, #final-message {
+      display: none;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- First screen -->
+  <div id="main-question">
+    <h1>Are you free to watch a movie tonight?</h1>
+    <button id="yesBtn" onclick="handleClick('yes')">Yes</button>
+    <button id="noBtn" onclick="handleClick('no')">No</button>
+    <div id="response"></div>
+  </div>
+
+  <!-- Second screen -->
+  <div id="movie-picker">
+    <h1>Okayyy, let’s pick a movie 🎬</h1>
+    <div class="option" onclick="pickMovie('A')">Movie A</div>
+    <div class="option" onclick="pickMovie('B')">Movie B</div>
+    <div class="option" onclick="pickMovie('C')">Movie C</div>
+    <div class="option" onclick="pickMovie('D')">Movie D</div>
+  </div>
+
+  <!-- Final message -->
+  <div id="final-message">
+    <h1 id="finalText"></h1>
+  </div>
+
+  <script>
+    let noClickCount = 0;
+
+    function handleClick(answer) {
+      const response = document.getElementById('response');
+
+      if (answer === 'yes') {
+        // Reset everything and go to movie picker
+        document.getElementById('main-question').style.display = 'none';
+        document.getElementById('movie-picker').style.display = 'block';
+        response.textContent = '';
+      } else {
+        noClickCount++;
+        if (noClickCount === 1) {
+          response.textContent = "You really wanna say no to a cutie like me? 🥺";
+        } else {
+          response.textContent = "Okie, will try again later ☺️";
+        }
+      }
+    }
+
+    function pickMovie(option) {
+      let time = "";
+
+      switch(option) {
+        case 'A': time = "11:00 PM"; break;
+        case 'B': time = "11:30 PM"; break;
+        case 'C': time = "12:00 AM"; break;
+        case 'D': time = "12:30 AM"; break;
+      }
+
+      document.getElementById('movie-picker').style.display = 'none';
+      document.getElementById('final-message').style.display = 'block';
+      document.getElementById('finalText').textContent = 
+        `Yay! Let's meet online to watch Movie ${option} at ${time} 🍿`;
+    }
+  </script>
+
+</body>
+</html>
